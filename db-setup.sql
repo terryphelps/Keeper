@@ -59,6 +59,17 @@
 --         ON DELETE CASCADE
 -- )
 
+-- INSERT INTO keeps (name, description) 
+-- VALUES ("Test Keepr 2", "Some text goes here" );
+
+-- SELECT * FROM users;
+
+
+-- -- USE THIS TO CLEAN OUT YOUR DATABASE
+-- DROP TABLE IF EXISTS vaultkeeps;
+-- DROP TABLE IF EXISTS vaults;
+-- DROP TABLE IF EXISTS keeps;
+-- DROP TABLE IF EXISTS users;
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- SELECT * FROM vaultkeeps vk
