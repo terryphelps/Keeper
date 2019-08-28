@@ -14,17 +14,21 @@ namespace keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _service;
+    public VaultsController(VaultsService service)
+    {
+      _service = service;
+    }
 
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
     {
-      var x = new User();
       return Ok(_service.Find());
     }
-    [HttpGet("/user{id}")]
-    public ActionResult<Vault> GetUser(string id)
+    [HttpGet("user")]
+    public ActionResult<Vault> GetUser(string userId)
     {
-      return Ok(_service.FindByUserId(id));
+      userId = HttpContext.User.FindFirstValue("Id");
+      return Ok(_service.FindByUserId(userId));
     }
     [HttpGet("{id}")]
     public ActionResult<Vault> GetVault(int id)
@@ -37,20 +41,16 @@ namespace keepr.Controllers
       vault.UserId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.Create(vault));
     }
-    [HttpPut("{id}")]
-    public ActionResult<Vault> Update([FromBody]Vault vault)
-    {
-      return Ok(_service.Update(vault));
-    }
+    // [HttpPut("{id}")]
+    // public ActionResult<Vault> Update([FromBody]Vault vault)
+    // {
+    //   return Ok(_service.Update(vault));
+    // }
     [HttpDelete("{id}")]
 
     public ActionResult<bool> Delete(int id)
     {
       return Ok(_service.Delete(id));
-    }
-    public VaultsController(VaultsService service)
-    {
-      _service = service;
     }
   }
 }

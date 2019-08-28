@@ -17,13 +17,13 @@ namespace keepr.Services
     {
       return _repo.Create(vaultKeep);
     }
-    public bool Delete(int id)
+    // public bool Delete(int id)
+    // {
+    //   return _repo.Delete(id);
+    // }
+    public IEnumerable<VaultKeep> FindVaultKeepsById(int vkId, string userId)
     {
-      return _repo.Delete(id);
-    }
-    public List<VaultKeep> FindKeepsById(int id)
-    {
-      return _repo.FindKeepsById(id);
+      return _repo.FindVaultKeepsById(vkId, userId);
     }
   }
 }

@@ -16,27 +16,29 @@ namespace keepr.Repositories
 
     public VaultKeep Create(VaultKeep vaultKeep)
     {
+      // var vaultId = vaultKeep.VaultId;
       int id = _db.ExecuteScalar<int>(@"
-      INSERT INTO vaultKeep (vaultId, keepId, userId) VALUES(@VaultId, @KeepId, @UserId)
+      INSERT INTO vaultKeeps (vaultId, keepId, userId) VALUES(@VaultId, @KeepId, @UserId);
       SELECT LAST_INSERT_ID()", vaultKeep);
       vaultKeep.Id = id;
       return vaultKeep;
     }
-    public bool Delete(int id)
-    {
-      int success = _db.Execute(@"
-       DELETE FROM vaultKeep WHERE id = @id
-       ", new { id });
-      return success > 0;
-    }
+    // public bool Delete(int id)
+    // {
+    //   int success = _db.Execute(@"
+    //    DELETE FROM vaultKeeps WHERE id = @id
+    //    ", new { id });
+    //   return success > 0;
+    // }
 
-    public List<VaultKeep> FindKeepsById(int id)
+    public IEnumerable<VaultKeep> FindVaultKeepsById(int vaultId, string userId)
     {
-      return _db.Query<VaultKeep>(@"
+      string query = @"
         SELECT * FROM vaultkeeps vk
         INNER JOIN keeps k ON k.id = vk.keepId
-        WHERE (vaultId = @vaultId AND vk.userId = @userId)
-        ").ToList();
+        WHERE (vaultId = @vaultId AND vk.userId = @userId);
+        ";
+      return _db.Query<VaultKeep>(query, new { vaultId, userId });
     }
   }
 }

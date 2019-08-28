@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using System.Security.Claims;
 using keepr.Models;
@@ -22,23 +20,23 @@ namespace keepr.Controllers
       _service = service;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<VaultKeep>> Get(int id)
-    {
-      var x = new User();
-      return Ok(_service.FindKeepsById(id));
-    }
-    [HttpDelete]
-    public ActionResult<bool> Delete(int id)
-    {
-      return Ok(_service.Delete(id));
-    }
-
     [HttpPost]
     public ActionResult<VaultKeep> Create([FromBody]VaultKeep vaultKeep)
     {
       vaultKeep.UserId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.Create(vaultKeep));
     }
+    [HttpGet("{id}")]
+
+    public ActionResult<IEnumerable<VaultKeep>> FindVaultKeepsById(int vkId)
+    {
+      var userId = HttpContext.User.FindFirstValue("Id");
+      return Ok(_service.FindVaultKeepsById(vkId, userId));
+    }
+    // [HttpDelete("{id}")]
+    // public ActionResult<bool> Delete(int id)
+    // {
+    //   return Ok(_service.Delete(id));
+    // }
   }
 }

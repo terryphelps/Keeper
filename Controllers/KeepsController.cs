@@ -18,13 +18,14 @@ namespace keepr.Controllers
     [HttpGet]
     public ActionResult<IEnumerable<Keep>> Get()
     {
-      var x = new User();
+      // var x = new User();
       return Ok(_service.Find());
     }
-    [HttpGet("/user/{id}")]
-    public ActionResult<Keep> GetUser(string id)
+    [HttpGet("user")]
+    public ActionResult<Keep> GetUser(string userId)
     {
-      return Ok(_service.FindByUserId(id));
+      userId = HttpContext.User.FindFirstValue("Id");
+      return Ok(_service.FindByUserId(userId));
     }
     [HttpGet("{id}")]
     public ActionResult<Keep> GetKeep(int id)
@@ -38,11 +39,6 @@ namespace keepr.Controllers
       return Ok(_service.Create(keep));
     }
 
-    [HttpPut("{id}")]
-    public ActionResult<Keep> Update([FromBody]Keep keep)
-    {
-      return Ok(_service.Update(keep));
-    }
     [HttpDelete("{id}")]
     public ActionResult<bool> Delete(int id)
     {
@@ -53,5 +49,10 @@ namespace keepr.Controllers
     {
       _service = service;
     }
+    // [HttpPut("{id}")]
+    // public ActionResult<Keep> Update([FromBody]Keep keep)
+    // {
+    //   return Ok(_service.Update(keep));
+    // }
   }
 }

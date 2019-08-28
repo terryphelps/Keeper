@@ -62,7 +62,9 @@
 -- INSERT INTO keeps (name, description) 
 -- VALUES ("Test Keepr 2", "Some text goes here" );
 
--- SELECT * FROM users;
+-- SELECT * FROM keeps;
+-- SELECT * FROM vaults;
+-- DELETE * FROM vaults WHERE id = 2;
 
 
 -- -- USE THIS TO CLEAN OUT YOUR DATABASE

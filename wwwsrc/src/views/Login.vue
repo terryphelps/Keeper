@@ -35,9 +35,9 @@
                 }
             };
         },
-        beforeCreate(){
-            if(this.$store.state.user.id){
-                this.$router.push({name: "home"})
+        beforeCreate() {
+            if (this.$store.state.user.id) {
+                this.$router.push({ name: "home" })
             }
         },
         methods: {

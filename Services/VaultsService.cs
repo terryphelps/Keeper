@@ -18,10 +18,10 @@ namespace keepr.Services
     {
       return _repo.Create(vault);
     }
-    public Vault Update(Vault vault)
-    {
-      return _repo.Update(vault);
-    }
+    // public Vault Update(Vault vault)
+    // {
+    //   return _repo.Update(vault);
+    // }
     public bool Delete(int id)
     {
       return _repo.Delete(id);

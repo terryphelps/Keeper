@@ -18,15 +18,7 @@ namespace keepr.Repositories
     public Keep Create(Keep keep)
     {
       int id = _db.ExecuteScalar<int>(@"
-      INSERT INTO keeps (name, description, userid, img, isprivate) VALUES (@Name, @Description, @UserId, @Img, @IsPrivate);
-      SELECT LAST_INSERT_ID()", keep);
-      keep.Id = id;
-      return keep;
-    }
-    public Keep Update(Keep keep)
-    {
-      int id = _db.ExecuteScalar<int>(@"
-     UPDATE keeps (name, description, img, isprivate) VALUES (@Name, @Description, @Img, @IsPrivate);
+      INSERT INTO keeps (name, description, userId, img, isPrivate) VALUES (@Name, @Description, @UserId, @Img, @IsPrivate);
       SELECT LAST_INSERT_ID()", keep);
       keep.Id = id;
       return keep;
@@ -40,11 +32,11 @@ namespace keepr.Repositories
       return success > 0;
     }
 
-    public List<Keep> FindByUserId(string id)
+    public List<Keep> FindByUserId(string userId)
     {
       return _db.Query<Keep>(@"
-      SELECT * FROM keeps WHERE userid = @UserId
-      ", new { id }).ToList();
+      SELECT * FROM keeps WHERE userId = @UserId
+      ", new { userId }).ToList();
     }
     public Keep FindKeepById(int id)
     {
@@ -55,7 +47,7 @@ namespace keepr.Repositories
     public List<Keep> Find()
     {
       return _db.Query<Keep>(@"
-      SELECT * FROM keeps
+      SELECT * FROM keeps WHERE isPrivate = 0
       ").ToList();
     }
   }
