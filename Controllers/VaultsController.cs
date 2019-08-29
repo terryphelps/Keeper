@@ -20,10 +20,10 @@ namespace keepr.Controllers
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get()
-    {
-      return Ok(_service.Find());
-    }
+    // public ActionResult<IEnumerable<Vault>> Get()
+    // {
+    //   return Ok(_service.Find());
+    // }
     [HttpGet("user")]
     public ActionResult<Vault> GetUser(string userId)
     {

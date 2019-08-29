@@ -18,6 +18,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    }
+    },
+    // {
+    //   path: '/vault',
+    //   name: 'vault',
+    //   component: Home
+    // },
+    // {
+    //   path: '/keeps',
+    //   name: 'keeps',
+    //   component: Home
+    // },
   ]
 })

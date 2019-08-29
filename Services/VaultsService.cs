@@ -34,9 +34,9 @@ namespace keepr.Services
     {
       return _repo.FindVaultById(id);
     }
-    public List<Vault> Find()
-    {
-      return _repo.Find();
-    }
+    // public List<Vault> Find()
+    // {
+    //   return _repo.Find();
+    // }
   }
 }

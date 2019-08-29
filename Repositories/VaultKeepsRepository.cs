@@ -23,13 +23,14 @@ namespace keepr.Repositories
       vaultKeep.Id = id;
       return vaultKeep;
     }
-    // public bool Delete(int id)
-    // {
-    //   int success = _db.Execute(@"
-    //    DELETE FROM vaultKeeps WHERE id = @id
-    //    ", new { id });
-    //   return success > 0;
-    // }
+    public VaultKeep Delete(VaultKeep vaultKeep)
+    {
+      var id = _db.Execute(@"
+       DELETE FROM vaultKeeps WHERE vaultId = @VaultId AND keepId = @KeepId AND userId = @UserId
+       ", vaultKeep);
+      vaultKeep.Id = id;
+      return vaultKeep;
+    }
 
     public IEnumerable<VaultKeep> FindVaultKeepsById(int vaultId, string userId)
     {

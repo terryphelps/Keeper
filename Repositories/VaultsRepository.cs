@@ -53,11 +53,11 @@ namespace keepr.Repositories
       ", new { id }).FirstOrDefault();
     }
 
-    public List<Vault> Find()
-    {
-      return _db.Query<Vault>(@"
-      SELECT * FROM vaults
-      ").ToList();
-    }
+    // public List<Vault> Find(string userId)
+    // {
+    //   return _db.Query<Vault>(@"
+    //   SELECT * FROM vaults WHERE userid = @UserId
+    //   ").ToList();
+    // }
   }
 }

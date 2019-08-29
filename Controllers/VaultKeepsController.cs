@@ -33,10 +33,11 @@ namespace keepr.Controllers
       var userId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.FindVaultKeepsById(vkId, userId));
     }
-    // [HttpDelete("{id}")]
-    // public ActionResult<bool> Delete(int id)
-    // {
-    //   return Ok(_service.Delete(id));
-    // }
+    [HttpPut]
+    public ActionResult<VaultKeep> Delete([FromBody]VaultKeep vaultKeep)
+    {
+      vaultKeep.UserId = HttpContext.User.FindFirstValue("Id");
+      return Ok(_service.Delete(vaultKeep));
+    }
   }
 }

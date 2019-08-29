@@ -17,10 +17,10 @@ namespace keepr.Services
     {
       return _repo.Create(vaultKeep);
     }
-    // public bool Delete(int id)
-    // {
-    //   return _repo.Delete(id);
-    // }
+    public VaultKeep Delete(VaultKeep vaultKeep)
+    {
+      return _repo.Delete(vaultKeep);
+    }
     public IEnumerable<VaultKeep> FindVaultKeepsById(int vkId, string userId)
     {
       return _repo.FindVaultKeepsById(vkId, userId);

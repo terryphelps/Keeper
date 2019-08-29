@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace keepr.Controllers
 {
-  [Authorize]
+
   [Route("api/[controller]")]
   [ApiController]
 
@@ -18,11 +18,11 @@ namespace keepr.Controllers
     [HttpGet]
     public ActionResult<IEnumerable<Keep>> Get()
     {
-      // var x = new User();
       return Ok(_service.Find());
     }
+    [Authorize]
     [HttpGet("user")]
-    public ActionResult<Keep> GetUser(string userId)
+    public ActionResult<Keep> GetUserKeeps(string userId)
     {
       userId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.FindByUserId(userId));
@@ -32,13 +32,14 @@ namespace keepr.Controllers
     {
       return Ok(_service.FindKeepById(id));
     }
+    [Authorize]
     [HttpPost]
     public ActionResult<Keep> Create([FromBody]Keep keep)
     {
       keep.UserId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.Create(keep));
     }
-
+    [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<bool> Delete(int id)
     {
