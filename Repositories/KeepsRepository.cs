@@ -24,7 +24,7 @@ namespace keepr.Repositories
       return keep;
     }
 
-    public bool Delete(int id)
+    public bool Delete(int id, string userId)
     {
       int success = _db.Execute(@"
         DELETE FROM keeps WHERE id = @id
@@ -40,8 +40,9 @@ namespace keepr.Repositories
     }
     public Keep FindKeepById(int id)
     {
+
       return _db.Query<Keep>(@"
-      SELECT * FROM keeps WHERE id = @id
+      SELECT * FROM keeps WHERE id = @id AND isPrivate = 0
       ", new { id }).FirstOrDefault();
     }
     public List<Keep> Find()
@@ -50,6 +51,9 @@ namespace keepr.Repositories
       SELECT * FROM keeps WHERE isPrivate = 0
       ").ToList();
     }
+
+    //TODO ADD A METHOD FOR UPDATING A KEEP
+
   }
 }
 

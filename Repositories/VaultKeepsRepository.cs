@@ -23,6 +23,15 @@ namespace keepr.Repositories
       vaultKeep.Id = id;
       return vaultKeep;
     }
+    public IEnumerable<Keep> FindVaultKeepsById(int vaultId, string userId)
+    {
+      string query = @"
+        SELECT * FROM vaultkeeps vk
+        INNER JOIN keeps k ON k.id = vk.keepId
+        WHERE (vaultId = @vaultId AND vk.userId = @userId);
+        ";
+      return _db.Query<Keep>(query, new { vaultId, userId });
+    }
     public VaultKeep Delete(VaultKeep vaultKeep)
     {
       var id = _db.Execute(@"
@@ -32,14 +41,5 @@ namespace keepr.Repositories
       return vaultKeep;
     }
 
-    public IEnumerable<VaultKeep> FindVaultKeepsById(int vaultId, string userId)
-    {
-      string query = @"
-        SELECT * FROM vaultkeeps vk
-        INNER JOIN keeps k ON k.id = vk.keepId
-        WHERE (vaultId = @vaultId AND vk.userId = @userId);
-        ";
-      return _db.Query<VaultKeep>(query, new { vaultId, userId });
-    }
   }
 }

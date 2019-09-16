@@ -43,7 +43,8 @@ namespace keepr.Controllers
     [HttpDelete("{id}")]
     public ActionResult<bool> Delete(int id)
     {
-      return Ok(_service.Delete(id));
+      var userId = HttpContext.User.FindFirstValue("Id");
+      return Ok(_service.Delete(id, userId));
     }
 
     public KeepsController(KeepsService service)

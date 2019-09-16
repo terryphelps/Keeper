@@ -18,12 +18,6 @@ namespace keepr.Controllers
     {
       _service = service;
     }
-
-    [HttpGet]
-    // public ActionResult<IEnumerable<Vault>> Get()
-    // {
-    //   return Ok(_service.Find());
-    // }
     [HttpGet("user")]
     public ActionResult<Vault> GetUser(string userId)
     {
@@ -41,11 +35,7 @@ namespace keepr.Controllers
       vault.UserId = HttpContext.User.FindFirstValue("Id");
       return Ok(_service.Create(vault));
     }
-    // [HttpPut("{id}")]
-    // public ActionResult<Vault> Update([FromBody]Vault vault)
-    // {
-    //   return Ok(_service.Update(vault));
-    // }
+
     [HttpDelete("{id}")]
 
     public ActionResult<bool> Delete(int id)

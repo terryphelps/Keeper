@@ -28,10 +28,10 @@ namespace keepr.Controllers
     }
     [HttpGet("{id}")]
 
-    public ActionResult<IEnumerable<VaultKeep>> FindVaultKeepsById(int vkId)
+    public ActionResult<IEnumerable<Keep>> FindVaultKeepsById(int id)
     {
       var userId = HttpContext.User.FindFirstValue("Id");
-      return Ok(_service.FindVaultKeepsById(vkId, userId));
+      return Ok(_service.FindVaultKeepsById(id, userId));
     }
     [HttpPut]
     public ActionResult<VaultKeep> Delete([FromBody]VaultKeep vaultKeep)

@@ -21,9 +21,9 @@ namespace keepr.Services
     //   return _repo.Update(keep);
     // }
 
-    public bool Delete(int id)
+    public bool Delete(int id, string userId)
     {
-      return _repo.Delete(id);
+      return _repo.Delete(id, userId);
     }
     public List<Keep> FindByUserId(string userId)
     {
